@@ -29,7 +29,7 @@ class Dark_Lord (Robot):
             # When the robot is done standing for stabilization, it moves forwards
             if self.library.get('Stand').isOver():
                 self.library.play('ForwardLoop')  # walk forward
-                self.library.play('Custom')        # play the shove motion
+                self.library.play('Custom')        # play the shove motion/
 
 
 # create the Robot instance and run main loop/
