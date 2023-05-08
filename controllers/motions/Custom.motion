@@ -1,11 +1,6 @@
-#WEBOTS_MOTION,V1.0,RShoulderPitch,RShoulderRoll,RElbowRoll,LShoulderPitch,LShoulderRoll,LElbowRoll
-00:00:000,Pose1,1,-1,0,1,1,0
-00:00:700,Pose2,0,0,0,0,0,0
-
-
-
-
-
+#WEBOTS_MOTION,V1.0,RShoulderPitch,RShoulderRoll,RElbowRoll,RElbowYaw,LShoulderPitch,LShoulderRoll,LElbowRoll,LElbowYaw
+00:00:000,Pose1,1,0,0,0,1,0,0,0
+00:00:040,Pose2,-0.5,0,0,0,-0.5,0,0,0
 
 
 
