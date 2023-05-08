@@ -4,7 +4,7 @@ sys.path.append('..')
 from utils.motion_library import MotionLibrary
 
 
-class Charlie (Robot):
+class Dark_Lord (Robot):
     def __init__(self):
         Robot.__init__(self)
         self.time_step = int(self.getBasicTimeStep())
@@ -17,7 +17,7 @@ class Charlie (Robot):
 
         self.library = MotionLibrary()
         # adding a custom motion to the library
-        # self.library.add('Shove', './Shove.motion', loop=True)
+        self.library.add('Shove', './Shove.motion', loop=True)
 
     def run(self):
         self.library.play('Stand')
@@ -28,10 +28,10 @@ class Charlie (Robot):
         while self.step(self.time_step) != -1:
             # When the robot is done standing for stabilization, it moves forwards
             if self.library.get('Stand').isOver():
-                # self.library.play('ForwardLoop' )  # walk forward
-                self.library.play('ForwardLoop')        # play the shove motion
+                self.library.play('ForwardLoop')  # walk forward
+                self.library.play('Custom')        # play the shove motion
 
 
 # create the Robot instance and run main loop
-wrestler = Charlie()
+wrestler = Dark_Lord()
 wrestler.run()
