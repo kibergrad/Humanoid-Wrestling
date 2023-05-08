@@ -17,7 +17,7 @@ class Dark_Lord (Robot):
 
         self.library = MotionLibrary()
         # adding a custom motion to the library
-        self.library.add('Shove', './Shove.motion', loop=True)
+        # self.library.add('Shove', './Shove.motion', loop=True)
 
     def run(self):
         self.library.play('Stand')
