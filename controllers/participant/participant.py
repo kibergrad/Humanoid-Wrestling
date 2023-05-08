@@ -32,6 +32,6 @@ class Dark_Lord (Robot):
                 self.library.play('Custom')        # play the shove motion
 
 
-# create the Robot instance and run main loop
+# create the Robot instance and run main loop/
 wrestler = Dark_Lord()
 wrestler.run()
