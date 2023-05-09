@@ -17,7 +17,8 @@ class Dark_Lord (Robot):
 
         self.library = MotionLibrary()
         # adding a custom motion to the library
-        # self.library.add('Shove', './Shove.motion', loop=True)
+        self.library.add('ForwardLoop', './ForwardLoop.motion', loop=True)
+        self.library.add('Cust', './Cust.motion', loop=True)
 
     def run(self):
         self.library.play('Stand')
@@ -29,9 +30,9 @@ class Dark_Lord (Robot):
             # When the robot is done standing for stabilization, it moves forwards
             if self.library.get('Stand').isOver():
                 self.library.play('ForwardLoop')  # walk forward
-                self.library.play('Custom')        # play the shove motion/
+                self.library.play('Cust')        # play the shove motion
 
 
-# create the Robot instance and run main loop/
+# create the Robot instance and run main loop
 wrestler = Dark_Lord()
 wrestler.run()
