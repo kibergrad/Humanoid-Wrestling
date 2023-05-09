@@ -9,7 +9,7 @@ class Dark_Lord (Robot):
         Robot.__init__(self)
         self.time_step = int(self.getBasicTimeStep())
 
-        # there are 7 controllable LEDs on the NAO robot, but we will use only the ones in the eyes
+        # there are 7 controllable LEDs on the NAO robot, but we will use/ only the ones in the eyes
         self.leds = {
             'right': self.getDevice('Face/Led/Right'),
             'left':  self.getDevice('Face/Led/Left')
