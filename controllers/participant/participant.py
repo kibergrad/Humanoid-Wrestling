@@ -2,16 +2,18 @@ from controller import Robot
 import sys
 sys.path.append('..')
 from utils.motion_library import MotionLibrary
+
+# Eve's locate_opponent() is implemented in this module:
 from utils.image_processing import ImageProcessing as IP
 from utils.fall_detection import FallDetection
 from utils.gait_manager import GaitManager
 from utils.camera import Camera
 
 
-class Dark_Lord (Robot):
-    SMALLEST_TURNING_RADIUS = 0.1
+class Sultaan (Robot):
+    SMALLEST_TURNING_RADIUS = 0.01
     SAFE_ZONE = 0.75
-    TIME_BEFORE_DIRECTION_CHANGE = 100  # 8000 ms / 40 ms/
+    TIME_BEFORE_DIRECTION_CHANGE = 0  # 8000 ms / 40 ms
 
     def __init__(self):
         Robot.__init__(self)
@@ -23,11 +25,26 @@ class Dark_Lord (Robot):
         self.gait_manager = GaitManager(self, self.time_step)
         self.heading_angle = 3.14 / 2
         self.counter = 0
-        self.library.add('Cust', './Cust.motion', loop=True)
-        
+        self.library.add('Cust', './Cust.motion', loop = True)
+        self.leds = {
+            'rightf': self.getDevice('Face/Led/Right'), 
+            'leftf': self.getDevice('Face/Led/Left'), 
+            'righte': self.getDevice('Ears/Led/Right'), 
+            'lefte': self.getDevice('Ears/Led/Left'), 
+            'chest': self.getDevice('ChestBoard/Led'), 
+        }
     def run(self):
         while self.step(self.time_step) != -1:
+            # We need to update the internal theta value of the gait manager at every step:
             t = self.getTime()
+            # self.LeftHand.setPosition(-0.3)
+            # self.RightHand.setPosition(0.3)
+            self.leds['rightf'].set(0xff0000)
+            self.leds['leftf'].set(0xff0000)
+            self.leds['righte'].set(0xff0000)
+            self.leds['lefte'].set(0xff0000)
+            self.leds['chest'].set(0xff0000)
+
             self.gait_manager.update_theta()
             if 0.3 < t < 3:
                 self.start_sequence()
@@ -63,6 +80,5 @@ class Dark_Lord (Robot):
         return horizontal_coordinate * 2 / img.shape[1] - 1
 
 # create the Robot instance and run main loop
-wrestler = Dark_Lord()
+wrestler = Sultaan()
 wrestler.run()
-
