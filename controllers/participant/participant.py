@@ -1,7 +1,3 @@
-#WEBOTS_MOTION,V1.0,RShoulderPitch,RShoulderRoll,RElbowRoll,RElbowYaw,LShoulderPitch,LShoulderRoll,LElbowRoll,LElbowYaw
-
-00:00:600,Pose1,1,0.0,0,0,1,0,-0.0,0
-
 from controller import Robot
 import sys
 sys.path.append('..')
