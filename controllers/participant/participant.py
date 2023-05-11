@@ -13,7 +13,7 @@ from utils.camera import Camera
 class Dark_Lord(Robot):
     SMALLEST_TURNING_RADIUS = 0.01
     SAFE_ZONE = 0.75
-    TIME_BEFORE_DIRECTION_CHANGE = 20  # 8000 ms / 40 ms/
+    TIME_BEFORE_DIRECTION_CHANGE = 0  # 8000 ms / 40 ms/
 
     def __init__(self):
         Robot.__init__(self)
