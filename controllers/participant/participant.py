@@ -11,9 +11,9 @@ from utils.camera import Camera
 
 
 class Sultaan (Robot):
-    SMALLEST_TURNING_RADIUS = 0.05
+    SMALLEST_TURNING_RADIUS = 0.01
     SAFE_ZONE = 0.75
-    TIME_BEFORE_DIRECTION_CHANGE = 0.1  # 8000 ms / 40 ms
+    TIME_BEFORE_DIRECTION_CHANGE = 0  # 8000 ms / 40 ms
 
     def __init__(self):
         Robot.__init__(self)
