@@ -27,7 +27,7 @@ class Dark_Lord (Robot):
         self.gait_manager = GaitManager(self, self.time_step)
         self.heading_angle = 3.14 / 2
         self.counter = 0
-        self.library.add('Anglehandupdown', './Anglehandupdown.motion', loop = True)
+        self.library.add('Fast', './Fast.motion', loop = True)
         self.leds = {
             'rightf': self.getDevice('Face/Led/Right'), 
             'leftf': self.getDevice('Face/Led/Left'), 
@@ -89,7 +89,7 @@ class Dark_Lord (Robot):
             return  
         self.counter += 1
         self.gait_manager.command_to_motors(desired_radius=desired_radius, heading_angle=self.heading_angle)
-        self.library.play('Anglehandupdown')
+        self.library.play('Fast')
 
     def _get_normalized_opponent_x(self):
         """Locate the opponent in the image and return its horizontal position in the range [-1, 1]."""
