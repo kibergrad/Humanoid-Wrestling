@@ -20,7 +20,7 @@ class Charlie (Robot):
 
         self.library = MotionLibrary()
         # adding a custom motion to the library
-        self.library.add('First', './First.motion', loop = True)
+        self.library.add('Anglehandupdown', './Anglehandupdown.motion', loop = True)
 #         self.library.add('Forward3Loop', './Forward3Loop.motion', loop = True)
 
     def run(self):
@@ -36,7 +36,7 @@ class Charlie (Robot):
             # When the robot is done standing for stabilization, it moves forwards
             if self.library.get('Stand').isOver():
                 self.library.play('ForwardLoop')  # walk forward
-                self.library.play('First')        # play the shove motion
+                self.library.play('Anglehandupdown')        # play the shove motion
 
 
 # create the Robot instance and run main loop
