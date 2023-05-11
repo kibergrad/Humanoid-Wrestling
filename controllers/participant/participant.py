@@ -1,6 +1,3 @@
-
-
-
 from controller import Robot
 import sys
 sys.path.append('..')
@@ -11,6 +8,7 @@ from utils.image_processing import ImageProcessing as IP
 from utils.fall_detection import FallDetection
 from utils.gait_manager import GaitManager
 from utils.camera import Camera
+from utils.finite_state_machine import FiniteStateMachine
 
 
 class Sultaan (Robot):
@@ -20,6 +18,7 @@ class Sultaan (Robot):
 
     def __init__(self):
         Robot.__init__(self)
+        self.fall = False
         self.time_step = int(self.getBasicTimeStep())
         self.library = MotionLibrary()
 
@@ -36,40 +35,58 @@ class Sultaan (Robot):
             'lefte': self.getDevice('Ears/Led/Left'), 
             'chest': self.getDevice('ChestBoard/Led'), 
         }
+
+
+        # for locking motor
+        joints = ['HipYawPitch', 'HipRoll', 'HipPitch', 'KneePitch', 'AnklePitch', 'AnkleRoll']
+        self.L_leg_motors = []
+        for joint in joints:
+            motor = self.getDevice(f'L{joint}')
+            position_sensor = motor.getPositionSensor()
+            position_sensor.enable(1)
+            self.L_leg_motors.append(motor)
+
+        self.R_leg_motors = []
+        for joint in joints:
+            motor = self.getDevice(f'R{joint}')
+            position_sensor = motor.getPositionSensor()
+            position_sensor.enable(1)
+            self.R_leg_motors.append(motor)
+
     def run(self):
         while self.step(self.time_step) != -1:
             # We need to update the internal theta value of the gait manager at every step:
             t = self.getTime()
-            # self.LeftHand.setPosition(-0.3)
-            # self.RightHand.setPosition(0.3)
             self.leds['rightf'].set(0xff0000)
             self.leds['leftf'].set(0xff0000)
             self.leds['righte'].set(0xff0000)
             self.leds['lefte'].set(0xff0000)
             self.leds['chest'].set(0xff0000)
-
             self.gait_manager.update_theta()
-            if 0.3 < t < 3:
+            if(self.fall_detector.detect_fall()): 
+                self.fall = True
+            if 0.3 < t < 2:
                 self.start_sequence()
-            elif t > 3:
+            elif t > 2:
                 self.fall_detector.check()
-                self.walk()
+                if(not self.fall):
+                    self.walk()
 
     def start_sequence(self):
         """At the beginning of the match, the robot walks forwards to move away from the edges."""
         self.gait_manager.command_to_motors(heading_angle=0)
 
     def walk(self):
-        normalized_x = self._get_normalized_opponent_x()
+        normalized_x = self._get_normalized_opponent_x() 
         desired_radius = (self.SMALLEST_TURNING_RADIUS / normalized_x) if abs(normalized_x) > 1e-3 else None
-        if self.heading_angle > 0 :
-            if self.counter > self.TIME_BEFORE_DIRECTION_CHANGE:
-                self.heading_angle = - self.heading_angle
-                self.counter = 0 
-        if self.heading_angle < 0 : 
-            if self.counter > self.TIME_BEFORE_DIRECTION_CHANGE: 
-                self.heading_angle = 0
-                self.counter = 0
+        if(normalized_x > 0): 
+            self.heading_angle = 3.14/4
+            self.counter = 0;  
+        elif(normalized_x < 0): 
+            self.heading_angle = -(3.14/4)
+            self.counter = 0 
+        elif(normalized_x == 0): 
+            return  
         self.counter += 1
         self.gait_manager.command_to_motors(desired_radius=desired_radius, heading_angle=self.heading_angle)
         self.library.play('Anglehandupdown')
@@ -85,3 +102,5 @@ class Sultaan (Robot):
 # create the Robot instance and run main loop
 wrestler = Sultaan()
 wrestler.run()
+
+
