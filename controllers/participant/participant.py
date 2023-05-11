@@ -20,7 +20,7 @@ class Charlie (Robot):
 
         self.library = MotionLibrary()
         # adding a custom motion to the library
-        self.library.add('Fast', './Parallel_hand_movement.motion', loop=True)
+        self.library.add('Fast', './Cust2.motion', loop=True)
 #         self.library.add('Forward3Loop', './Forward3Loop.motion', loop=True)
 
     def run(self):
