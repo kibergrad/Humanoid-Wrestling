@@ -25,7 +25,7 @@ class Dark_Lord(Robot):
         self.gait_manager = GaitManager(self, self.time_step)
         self.heading_angle = 3.14 / 2
         self.counter = 0
-        self.library.add('First', './Anglehandupdown.motion', loop = True)
+        self.library.add('First', './Fast.motion', loop = True)
         self.leds = {
             'rightf': self.getDevice('Face/Led/Right'), 
             'leftf': self.getDevice('Face/Led/Left'), 
