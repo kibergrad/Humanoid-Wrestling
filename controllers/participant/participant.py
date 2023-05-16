@@ -10,7 +10,7 @@ from utils.fall_detection import FallDetection
 from utils.gait_manager import GaitManager
 from utils.camera import Camera
 from utils.finite_state_machine import FiniteStateMachine
-
+from boundaryDetection import boundaryDetection as BD
 
 class Sultaan (Robot):
     SMALLEST_TURNING_RADIUS = 0.1 #0.1
@@ -76,6 +76,11 @@ class Sultaan (Robot):
     def start_sequence(self):
         """At the beginning of the match, the robot walks forwards to move away from the edges."""
         self.gait_manager.command_to_motors(heading_angle=0)
+        
+    def boundaryDetection(self):
+        img = self.camera.get_image()
+        distance = BD.getDistance(img)
+        return distance
 
     def walk(self):
         normalized_x = self._get_normalized_opponent_x() 
