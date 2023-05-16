@@ -13,9 +13,9 @@ from utils.finite_state_machine import FiniteStateMachine
 
 
 class Sultaan (Robot):
-    SMALLEST_TURNING_RADIUS = 0.1
+    SMALLEST_TURNING_RADIUS = 0.0 #0.1
     SAFE_ZONE = 0.75
-    TIME_BEFORE_DIRECTION_CHANGE = 0  # 8000 ms / 40 ms/
+    TIME_BEFORE_DIRECTION_CHANGE = 0  # 80
 
     def __init__(self):
         Robot.__init__(self)
