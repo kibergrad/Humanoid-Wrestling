@@ -36,11 +36,7 @@ class Sultaan (Robot):
             'lefte': self.getDevice('Ears/Led/Left'), 
             'chest': self.getDevice('ChestBoard/Led'), 
         }
-        
-        self.HeadPitch = self.getDevice("HeadPitch")
-        d = 0
-        prevD = 0
-        
+
 
         # for locking motor
         joints = ['HipYawPitch', 'HipRoll', 'HipPitch', 'KneePitch', 'AnklePitch', 'AnkleRoll']
@@ -61,7 +57,6 @@ class Sultaan (Robot):
     def run(self):
         while self.step(self.time_step) != -1:
             # We need to update the internal theta value of the gait manager at every step:
-            self.HeadPitch.setPosition(0.3)
             t = self.getTime()
             self.leds['rightf'].set(0xff0000)
             self.leds['leftf'].set(0xff0000)
@@ -71,18 +66,12 @@ class Sultaan (Robot):
             self.gait_manager.update_theta()
             if(self.fall_detector.detect_fall()): 
                 self.fall = True
-            if 0.3 < t < 5:
+            if 0.3 < t < 2:
                 self.start_sequence()
-            elif t > 5:
+            elif t > 2:
                 self.fall_detector.check()
                 if(not self.fall):
-                    d = self.boundaryDetection()
-                    if d == -1:
-                        #print("boundary overflow")
-                        #prevD = d
-                        self.library.play('TurnLeft40')
-                    elif d!= -1:    
-                        self.walk()
+                    self.walk()
 
     def start_sequence(self):
         """At the beginning of the match, the robot walks forwards to move away from the edges."""
