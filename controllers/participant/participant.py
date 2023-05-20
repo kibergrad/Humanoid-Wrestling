@@ -13,7 +13,7 @@ from utils.finite_state_machine import FiniteStateMachine
 from boundaryDetection import boundaryDetection as BD
 
 class Sultaan (Robot):
-    SMALLEST_TURNING_RADIUS = 0.1 #0.1
+    SMALLEST_TURNING_RADIUS = 0.0 #0.1
     SAFE_ZONE = 0.75
     TIME_BEFORE_DIRECTION_CHANGE = 0  # 80
 
@@ -28,7 +28,7 @@ class Sultaan (Robot):
         self.gait_manager = GaitManager(self, self.time_step)
         self.heading_angle = 3.14 / 2
         self.counter = 0
-        self.library.add('Anglehandupdown', './Shove.motion', loop = True)
+        self.library.add('Anglehandupdown', './Anglehandupdown.motion', loop = True)
         self.leds = {
             'rightf': self.getDevice('Face/Led/Right'), 
             'leftf': self.getDevice('Face/Led/Left'), 
