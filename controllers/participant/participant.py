@@ -64,14 +64,14 @@ class Sultaan (Robot):
             self.leds['lefte'].set(0xff0000)
             self.leds['chest'].set(0xff0000)
             self.gait_manager.update_theta()
-            if(self.fall_detector.detect_fall()): 
-                self.fall = True
+            # if(self.fall_detector.detect_fall()): 
+            #     self.fall = True
             if 0.3 < t < 2:
                 self.start_sequence()
             elif t > 2:
                 self.fall_detector.check()
-                if(not self.fall):
-                    self.walk()
+                # if(not self.fall):
+                self.walk()
 
     def start_sequence(self):
         """At the beginning of the match, the robot walks forwards to move away from the edges."""
