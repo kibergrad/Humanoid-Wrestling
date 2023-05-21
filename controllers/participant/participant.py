@@ -15,7 +15,7 @@ from boundaryDetection import boundaryDetection as BD
 class Sultaan (Robot):
     SMALLEST_TURNING_RADIUS = 0.1 #0.1
     SAFE_ZONE = 0.75
-    TIME_BEFORE_DIRECTION_CHANGE = 60  # 80
+    TIME_BEFORE_DIRECTION_CHANGE = 40  # 80
 
     def __init__(self):
         Robot.__init__(self)
@@ -28,7 +28,8 @@ class Sultaan (Robot):
         self.gait_manager = GaitManager(self, self.time_step)
         self.heading_angle = 3.14 / 2
         self.counter = 0
-        self.library.add('Anglehandupdown', './New.motion', loop = True)
+        self.library.add('Anglehandupdown', './Shove.motion', loop = True)
+        # self.library.add('Anglehandupdown', './.motion', loop = True)
         self.leds = {
             'rightf': self.getDevice('Face/Led/Right'), 
             'leftf': self.getDevice('Face/Led/Left'), 
@@ -69,20 +70,27 @@ class Sultaan (Robot):
     def walk(self):
         normalized_x = self._get_normalized_opponent_x() 
         desired_radius = (self.SMALLEST_TURNING_RADIUS / normalized_x) if abs(normalized_x) > 1e-3 else None
-        if(normalized_x > 0): 
-            self.heading_angle = 3.14/5
+        if(normalized_x == -1): 
+            dist = self.boundaryDetection() 
+            # print(dist)
+            if(dist == -1):
+                self.heading_angle = 3.14
+            else: 
+                self.heading_angle = 0 
+        elif(normalized_x != -1 and normalized_x > 0): 
+            self.heading_angle = 3.14/4
             self.counter = 0;  
         elif(normalized_x < 0): 
-            self.heading_angle = -(3.14/5)
+            self.heading_angle = -(3.14/4)
             self.counter = 0 
         elif(normalized_x == 0): 
             return  
         self.counter += 1
         self.gait_manager.command_to_motors(desired_radius=desired_radius, heading_angle=self.heading_angle)
-        self.library.play('Anglehandupdown')
+        # self.library.play('Anglehandupdown')
 
-        # dist = self.boundaryDetection() 
-        # print(dist)
+
+            
 
     def _get_normalized_opponent_x(self):
         """Locate the opponent in the image and return its horizontal position in the range [-1, 1]."""
