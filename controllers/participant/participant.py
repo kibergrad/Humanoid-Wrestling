@@ -70,23 +70,25 @@ class Sultaan (Robot):
     def walk(self):
         normalized_x = self._get_normalized_opponent_x() 
         desired_radius = (self.SMALLEST_TURNING_RADIUS / normalized_x) if abs(normalized_x) > 1e-3 else None
-        if(normalized_x == -1): 
+        if(normalized_x): 
             dist = self.boundaryDetection() 
             # print(dist)
-            if(dist == -1):
-                self.heading_angle = 3.14
+            if(dist <20):
+                self.heading_angle = 3.14/2
+                
             else: 
-                self.heading_angle = 0 
-        elif(normalized_x != -1 and normalized_x > 0): 
-            self.heading_angle = 3.14/4
-            self.counter = 0;  
-        elif(normalized_x < 0): 
-            self.heading_angle = -(3.14/4)
-            self.counter = 0 
-        elif(normalized_x == 0): 
-            return  
+                self.heading_angle = 0
+                self.gait_manager.command_to_motors(desired_radius=0, heading_angle=self.heading_angle)
+
+        # elif(normalized_x != -1 and normalized_x > 0): 
+        #     self.heading_angle = 3.14/2
+        #     self.counter = 0;  
+        # elif(normalized_x < 0): 
+        #     self.heading_angle = -(3.14/2)
+        #     self.counter = 0 
+        # elif(normalized_x == 0): 
+        #     return  
         self.counter += 1
-        self.gait_manager.command_to_motors(desired_radius=desired_radius, heading_angle=self.heading_angle)
         # self.library.play('Anglehandupdown')
 
 
