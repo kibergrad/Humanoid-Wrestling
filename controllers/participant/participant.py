@@ -38,22 +38,6 @@ class Sultaan (Robot):
         }
 
 
-        # for locking motor
-        joints = ['HipYawPitch', 'HipRoll', 'HipPitch', 'KneePitch', 'AnklePitch', 'AnkleRoll']
-        self.L_leg_motors = []
-        for joint in joints:
-            motor = self.getDevice(f'L{joint}')
-            position_sensor = motor.getPositionSensor()
-            position_sensor.enable(1)
-            self.L_leg_motors.append(motor)
-
-        self.R_leg_motors = []
-        for joint in joints:
-            motor = self.getDevice(f'R{joint}')
-            position_sensor = motor.getPositionSensor()
-            position_sensor.enable(1)
-            self.R_leg_motors.append(motor)
-
     def run(self):
         while self.step(self.time_step) != -1:
             # We need to update the internal theta value of the gait manager at every step:
@@ -86,16 +70,19 @@ class Sultaan (Robot):
         normalized_x = self._get_normalized_opponent_x() 
         desired_radius = (self.SMALLEST_TURNING_RADIUS / normalized_x) if abs(normalized_x) > 1e-3 else None
         if(normalized_x > 0): 
-            self.heading_angle = 3.14/4
+            self.heading_angle = 3.14/5
             self.counter = 0;  
         elif(normalized_x < 0): 
-            self.heading_angle = -(3.14/4)
+            self.heading_angle = -(3.14/5)
             self.counter = 0 
         elif(normalized_x == 0): 
             return  
         self.counter += 1
         self.gait_manager.command_to_motors(desired_radius=desired_radius, heading_angle=self.heading_angle)
-        self.library.play('Anglehandupdown')
+        # self.library.play('Anglehandupdown')
+
+        # dist = self.boundaryDetection() 
+        # print(dist)
 
     def _get_normalized_opponent_x(self):
         """Locate the opponent in the image and return its horizontal position in the range [-1, 1]."""
