@@ -13,7 +13,7 @@ from utils.finite_state_machine import FiniteStateMachine
 from boundaryDetection import boundaryDetection as BD
 
 class Sultaan (Robot):
-    SMALLEST_TURNING_RADIUS = 0.1 #0.1
+    SMALLEST_TURNING_RADIUS = 0. #0.1
     SAFE_ZONE = 0.75
     TIME_BEFORE_DIRECTION_CHANGE = 0  # 80
 
