@@ -28,7 +28,7 @@ class Sultaan (Robot):
         self.gait_manager = GaitManager(self, self.time_step)
         self.heading_angle = 3.14 / 2
         self.counter = 0
-        self.library.add('Anglehandupdown', './Shove.motion', loop = True)
+        self.library.add('Anglehandupdown', './New.motion', loop = True)
         # self.library.add('Anglehandupdown', './.motion', loop = True)
         self.leds = {
             'rightf': self.getDevice('Face/Led/Right'), 
@@ -90,7 +90,7 @@ class Sultaan (Robot):
         # elif(normalized_x == 0): 
         #     return  
         self.counter += 1
-        # self.library.play('Anglehandupdown')
+        self.library.play('Anglehandupdown')
 
 
             
