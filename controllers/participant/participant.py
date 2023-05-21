@@ -79,7 +79,7 @@ class Sultaan (Robot):
             return  
         self.counter += 1
         self.gait_manager.command_to_motors(desired_radius=desired_radius, heading_angle=self.heading_angle)
-        # self.library.play('Anglehandupdown')
+        self.library.play('Anglehandupdown')
 
         # dist = self.boundaryDetection() 
         # print(dist)
