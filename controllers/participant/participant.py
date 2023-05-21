@@ -72,9 +72,10 @@ class Sultaan (Robot):
         desired_radius = (self.SMALLEST_TURNING_RADIUS / normalized_x) if abs(normalized_x) > 1e-3 else None
         if(normalized_x): 
             dist = self.boundaryDetection() 
-            # print(dist)
+            print(dist)
             if(dist <20):
                 self.heading_angle = 3.14/2
+                self.gait_manager.command_to_motors(desired_radius=desired_radius, heading_angle=self.heading_angle)
                 
             else: 
                 self.heading_angle = 0
