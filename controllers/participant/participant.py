@@ -1,5 +1,3 @@
-
-
 from controller import Robot
 import sys
 #sys.path.append('..')
