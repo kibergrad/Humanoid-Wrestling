@@ -258,4 +258,3 @@ class Sultaan (Robot):
 wrestler = Sultaan()
 wrestler.run()
 
-
