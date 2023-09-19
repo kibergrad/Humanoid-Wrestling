@@ -11,7 +11,7 @@ from utils.camera import Camera
 class Fatima (Robot):
     SMALLEST_TURNING_RADIUS = 0.1
     SAFE_ZONE = 0.75
-    TIME_BEFORE_DIRECTION_CHANGE = 200  # 8000 ms / 40 ms
+    TIME_BEFORE_DIRECTION_CHANGE = 200  # 8000 ms / 40 ms///////////
 
     def __init__(self):
         Robot.__init__(self)
