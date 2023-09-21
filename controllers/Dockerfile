@@ -1,11 +1,11 @@
-FROM cyberbotics/webots.cloud:R2023a-ubuntu20.04-numpy
+FROM cyberbotics/webots.cloud:R2023b-ubuntu22.04-numpy
 
 # Additional dependencies for the utils folder
 RUN apt-get update && apt-get install -y \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
 RUN pip3 install --upgrade pip && \
-    pip3 install --no-cache-dir \
+    pip3 install --root-user-action=ignore --no-cache-dir \
     opencv-python \
     scipy \
     ahrs
