@@ -8,7 +8,7 @@ from utils.image_processing import ImageProcessing as IP
 from utils.fall_detection import FallDetection
 from utils.gait_manager import GaitManager
 from utils.camera import Camera
-from myutils.camera2 import Camera2
+from utils.camera2 import Camera2
 from utils.finite_state_machine import FiniteStateMachine
 
 
