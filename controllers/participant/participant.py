@@ -8,6 +8,7 @@ from utils.image_processing import ImageProcessing as IP
 from utils.fall_detection import FallDetection
 from utils.gait_manager import GaitManager
 from utils.camera import Camera
+from myutils.camera2 import Camera2
 from utils.finite_state_machine import FiniteStateMachine
 
 
@@ -23,6 +24,7 @@ class Sultaan (Robot):
         self.library = MotionLibrary()
 
         self.camera = Camera(self)
+        self.camera2 = Camera2(self)
         self.fall_detector = FallDetection(self.time_step, self)
         self.gait_manager = GaitManager(self, self.time_step)
         self.heading_angle = 3.14 / 2
