@@ -22,7 +22,7 @@ class Sultaan (Robot):
         self.fall = False
         self.time_step = int(self.getBasicTimeStep())
         self.library = MotionLibrary()
-
+        d = 0
         self.camera = Camera(self)
         self.camera2 = Camera2(self)
         self.fall_detector = FallDetection(self.time_step, self)
@@ -75,6 +75,7 @@ class Sultaan (Robot):
                 if d == 1:
                     print("boundary overflow")
                     self.library.play('TurnLeft60')
+                    d = 0
                 elif(not self.fall):
                     self.walk()
 
