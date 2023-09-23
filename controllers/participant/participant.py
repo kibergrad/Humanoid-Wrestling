@@ -13,9 +13,9 @@ from utils.finite_state_machine import FiniteStateMachine
 import cv2
 import numpy as np
 class Sultaan (Robot):
-    SMALLEST_TURNING_RADIUS = 0.2
+    SMALLEST_TURNING_RADIUS = 0.1
     SAFE_ZONE = 0.75
-    TIME_BEFORE_DIRECTION_CHANGE = 200  # 8000 ms / 40 ms/
+    TIME_BEFORE_DIRECTION_CHANGE = 80  # 8000 ms / 40 ms/
 
     def __init__(self):
         Robot.__init__(self)
@@ -23,6 +23,7 @@ class Sultaan (Robot):
         self.time_step = int(self.getBasicTimeStep())
         self.library = MotionLibrary()
         d = 0
+        k = 0
         self.camera = Camera(self)
         self.camera2 = Camera2(self)
         self.fall_detector = FallDetection(self.time_step, self)
@@ -67,12 +68,16 @@ class Sultaan (Robot):
             self.gait_manager.update_theta()
             if(self.fall_detector.detect_fall()): 
                 self.fall = True
-            if 0.3 < t < 3:
+            img = self.camera.get_image()
+            _, _, horizontal_coordinate = IP.locate_opponent(img)
+            if horizontal_coordinate is None:
+                k=1000
+            if 0.3 < t < 2:
                 self.start_sequence()
-            elif t > 3:
+            elif t > 2:
                 self.fall_detector.check()
                 d = self.getDistance()
-                if d == 1:
+                if d == 1 and k == 1000 :
                     print("boundary overflow")
                     self.library.play('TurnLeft60')
                     d = 0
