@@ -13,7 +13,7 @@ from utils.finite_state_machine import FiniteStateMachine
 import cv2
 import numpy as np
 class Sultaan (Robot):
-    SMALLEST_TURNING_RADIUS = 0.1
+    SMALLEST_TURNING_RADIUS = 0
     SAFE_ZONE = 0.75
     TIME_BEFORE_DIRECTION_CHANGE = 80  # 8000 ms / 40 ms/
 
