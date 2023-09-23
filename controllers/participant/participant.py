@@ -15,7 +15,7 @@ import numpy as np
 class Sultaan (Robot):
     SMALLEST_TURNING_RADIUS = 0.1
     SAFE_ZONE = 0.75
-    TIME_BEFORE_DIRECTION_CHANGE = 80  # 8000 ms / 40 ms/
+    TIME_BEFORE_DIRECTION_CHANGE = 40  # 8000 ms / 40 ms/
 
     def __init__(self):
         Robot.__init__(self)
@@ -29,7 +29,7 @@ class Sultaan (Robot):
         self.gait_manager = GaitManager(self, self.time_step)
         self.heading_angle = 3.14 / 2
         self.counter = 0
-        self.library.add('New', './Khushi.motion', loop = True)
+        self.library.add('New', './Khushi2.motion', loop = True)
         self.leds = {
             'rightf': self.getDevice('Face/Led/Right'), 
             'leftf': self.getDevice('Face/Led/Left'), 
