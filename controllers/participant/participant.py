@@ -67,9 +67,9 @@ class Sultaan (Robot):
             self.gait_manager.update_theta()
             if(self.fall_detector.detect_fall()): 
                 self.fall = True
-            if 0.3 < t < 2:
+            if 0.3 < t < 4:
                 self.start_sequence()
-            elif t > 2:
+            elif t > 4:
                 self.fall_detector.check()
                 d = self.getDistance()
                 if d == 1:
