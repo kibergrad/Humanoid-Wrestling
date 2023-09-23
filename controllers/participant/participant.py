@@ -57,6 +57,7 @@ class Sultaan (Robot):
             self.R_leg_motors.append(motor)
 
     def run(self):
+        k=0
         while self.step(self.time_step) != -1:
             # We need to update the internal theta value of the gait manager at every step:
             t = self.getTime()
