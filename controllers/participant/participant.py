@@ -10,8 +10,8 @@ from utils.gait_manager import GaitManager
 from utils.camera import Camera
 from utils.camera2 import Camera2
 from utils.finite_state_machine import FiniteStateMachine
-
-
+import cv2
+import numpy as np
 class Sultaan (Robot):
     SMALLEST_TURNING_RADIUS = 0
     SAFE_ZONE = 0.75
@@ -79,8 +79,6 @@ class Sultaan (Robot):
                     self.walk()
 
     def getDistance(self):          #we use bottom oriented image for edge detection
-        import cv2
-        import numpy as np
         image = self.camera2.get_image()
         m = 0
         hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
