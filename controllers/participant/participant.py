@@ -82,6 +82,7 @@ class Sultaan (Robot):
                     print("boundary overflow")
                     self.library.play('TurnLeft60')
                     d = 0
+                    k=0
                 else:
                     self.walk()
 
