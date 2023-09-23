@@ -78,7 +78,7 @@ class Sultaan (Robot):
             elif t > 2:
                 self.fall_detector.check()
                 d = self.getDistance()
-                if d == 1 and k == 1000 :
+                if d == 1 or k == 1000 :
                     print("boundary overflow")
                     self.library.play('TurnLeft60')
                     d = 0
