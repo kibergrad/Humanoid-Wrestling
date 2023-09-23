@@ -43,7 +43,7 @@ class EllipsoidGaitGenerator():
         self.roll_reflex_factor = 4e-2  # h_VSR in the paper
         # the force reflex factor is h_ER/(mass*gravity) in the paper
         self.force_reflex_factor = 1e-2 / (5.305 * 9.81)
-        self.robot_height_offset = 0.31  # desired height for the robot's center of mass
+        self.robot_height_offset = 0.28  # desired height for the robot's center of mass
         self.lateral_leg_offset = 0.05  # y distance between the center of mass and one foot
         self.step_period = 0.3  # time to complete one step
         # amplitudes of stride:
