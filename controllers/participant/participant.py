@@ -10,7 +10,7 @@ class Bob (Robot):
         # to load all the motions from the motion folder, we use the Motion_library class:
         self.library = MotionLibrary()
 
-        # we initialize the shoulder pitch motors using the Robot.getDevice() function:
+        # we initialize the shoulder pitch motors using the Robot.getDevice() function:n b
         self.RShoulderPitch = self.getDevice("RShoulderPitch")
         self.LShoulderPitch = self.getDevice("LShoulderPitch")
 
